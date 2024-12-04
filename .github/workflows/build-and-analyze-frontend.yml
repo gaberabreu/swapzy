@@ -1,0 +1,56 @@
+name: Build and Analyze Frontend
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main", "develop", "feature/*"]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-and-analyze-frontend:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: "npm"
+
+      - name: Install SonarScanner
+        run: |
+          npm install -g sonarqube-scanner
+
+      - name: Run Install
+        run: npm install
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Build
+        run: npm run build
+
+      - name: Run Tests
+        run: npm run test:coverage
+
+      - name: Run SonarCloud Scan
+        run: |
+          sonar-scanner \
+            -Dsonar.projectKey=gaberabreu_swapzy_frontend \
+            -Dsonar.organization=gaberabreu \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.token=${{ secrets.SONAR_TOKEN_FRONTEND }} \
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
