@@ -23,6 +23,13 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          
+      - name: Check current directory
+        run: |
+          echo "Current working directory:"
+          pwd
+          echo "Listing files:"
+          ls -alh
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
