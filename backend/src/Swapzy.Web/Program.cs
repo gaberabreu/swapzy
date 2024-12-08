@@ -13,6 +13,17 @@ builder.Services.AddIdentityConfigs()
     .AddSwaggerConfigs()
     .AddInfrastructureServices();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
@@ -27,5 +38,7 @@ app.MapControllers();
 app.UseIdentityConfigs();
 
 app.MapHealthChecks("/health");
+
+app.UseCors("AllowAllOrigins");
 
 await app.RunAsync();
