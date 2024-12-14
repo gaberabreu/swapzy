@@ -22,15 +22,15 @@ describe("Register", () => {
   });
 
   it("should navigate to / when form submission succeeds", async () => {
-    vi.mocked(register).mockResolvedValue({ message: "User registered successfully!" });
+    vi.mocked(register).mockResolvedValue(null);
 
     const { getByText, getByLabelText } = render(<Register />);
 
-    fireEvent.change(getByLabelText(/Email:/i), {
+    fireEvent.change(getByLabelText(/Email/i), {
       target: { value: "testuser@example.com" },
     });
 
-    fireEvent.change(getByLabelText(/Password:/i), {
+    fireEvent.change(getByLabelText(/Password/i), {
       target: { value: "password123" },
     });
 
@@ -51,11 +51,11 @@ describe("Register", () => {
 
     const { getByText, getByLabelText } = render(<Register />);
 
-    fireEvent.change(getByLabelText(/Email:/i), {
+    fireEvent.change(getByLabelText(/Email/i), {
       target: { value: "testuser@example.com" },
     });
 
-    fireEvent.change(getByLabelText(/Password:/i), {
+    fireEvent.change(getByLabelText(/Password/i), {
       target: { value: "password123" },
     });
 
