@@ -3,11 +3,11 @@ import { toast } from "react-toastify";
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import { useNavigate } from "@tanstack/react-router";
 
-import { postRegister } from "@/services/auth.service";
+import { postLogin } from "@/services/auth.service";
 
-import Register from "./Register";
+import Login from "./Login";
 
-describe("Register", () => {
+describe("Login", () => {
   let mockNavigate: Mock;
 
   beforeEach(() => {
@@ -15,16 +15,16 @@ describe("Register", () => {
     vi.mocked(useNavigate).mockReturnValue(mockNavigate);
   });
 
-  it("should render Register properly", () => {
-    const { getByText } = render(<Register />);
+  it("should render Login properly", () => {
+    const { getByText } = render(<Login />);
 
-    expect(getByText("Register")).toBeInTheDocument();
+    expect(getByText("Login")).toBeInTheDocument();
   });
 
   it("should navigate to / when form submission succeeds", async () => {
-    vi.mocked(postRegister).mockResolvedValue(null);
+    vi.mocked(postLogin).mockResolvedValue(null);
 
-    const { getByText, getByLabelText } = render(<Register />);
+    const { getByText, getByLabelText } = render(<Login />);
 
     fireEvent.change(getByLabelText(/Email/i), {
       target: { value: "testuser@example.com" },
@@ -37,7 +37,7 @@ describe("Register", () => {
     fireEvent.click(getByText("Submit"));
 
     await waitFor(() => {
-      expect(postRegister).toHaveBeenCalledWith({
+      expect(postLogin).toHaveBeenCalledWith({
         email: "testuser@example.com",
         password: "password123",
       });
@@ -47,9 +47,9 @@ describe("Register", () => {
   });
 
   it("should toast an error when form submission fails", async () => {
-    vi.mocked(postRegister).mockRejectedValue({ title: "Registration failed" });
+    vi.mocked(postLogin).mockRejectedValue({ title: "Login failed" });
 
-    const { getByText, getByLabelText } = render(<Register />);
+    const { getByText, getByLabelText } = render(<Login />);
 
     fireEvent.change(getByLabelText(/Email/i), {
       target: { value: "testuser@example.com" },
@@ -62,7 +62,7 @@ describe("Register", () => {
     fireEvent.click(getByText("Submit"));
 
     await waitFor(() => {
-      expect(toast.error).toHaveBeenCalledWith("Registration failed");
+      expect(toast.error).toHaveBeenCalledWith("Login failed");
       expect(mockNavigate).not.toHaveBeenCalled();
     });
   });

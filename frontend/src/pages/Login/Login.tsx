@@ -21,21 +21,19 @@ import Link from "@/components/Link/Link";
 import LoadingButton from "@/components/LoadingButton/LoadingButton";
 import GoogleIcon from "@/icons/GoogleIcon";
 import SitemarkIcon from "@/icons/Sitemark";
-import { postRegister } from "@/services/auth.service";
+import { postLogin } from "@/services/auth.service";
+import useAuthStore from "@/stores/authStore";
 
-const formSchema: z.ZodType<RegisterRequestData> = z.object({
-  email: z.string().email("Please provide a valid email"),
-  password: z
-    .string()
-    .min(6, "Password must be at least 6 characters long")
-    .max(20, "Password must not exceed 20 characters"),
+const formSchema: z.ZodType<LoginRequestData> = z.object({
+  email: z.string().email("Please provide an email"),
+  password: z.string().min(1, "Please provide a password"),
 });
 
 const formOpts = formOptions({
   defaultValues: {
     email: "",
     password: "",
-  } as RegisterRequestData,
+  } as LoginRequestData,
   validatorAdapter: zodValidator(),
   validators: {
     onChange: formSchema,
@@ -83,15 +81,17 @@ const Card = styled(MuiCard)(({ theme }) => ({
   }),
 }));
 
-const Register: FC = () => {
-  const navigate = useNavigate({ from: "/register" });
+const Login: FC = () => {
+  const login = useAuthStore((state) => state.login);
+  const navigate = useNavigate({ from: "/login" });
 
   const form = useForm({
     ...formOpts,
     onSubmit: async ({ value }) => {
-      await postRegister(value)
-        .then(() => {
-          navigate({ to: "/login" });
+      await postLogin(value)
+        .then((token) => {
+          login(token);
+          navigate({ to: "/" });
         })
         .catch((error) => toast.error(error.title));
     },
@@ -109,7 +109,7 @@ const Register: FC = () => {
           variant="h4"
           sx={{ width: "100%", fontSize: "clamp(2rem, 10vw, 2.15rem)" }}
         >
-          Register
+          Login
         </Typography>
         <Box
           component="form"
@@ -195,19 +195,19 @@ const Register: FC = () => {
           <Button
             fullWidth
             variant="outlined"
-            onClick={() => alert("Register with Google")}
+            onClick={() => alert("Login with Google")}
             startIcon={<GoogleIcon />}
           >
-            Register with Google
+            Login with Google
           </Button>
           <Typography sx={{ textAlign: "center" }}>
-            Already have an account?{" "}
+            Dont have an account?{" "}
             <Link
               variant="body2"
               sx={{ alignSelf: "center" }}
-              to="/login"
+              to="/register"
             >
-              Login
+              Register
             </Link>
           </Typography>
         </Box>
@@ -216,4 +216,4 @@ const Register: FC = () => {
   );
 };
 
-export default Register;
+export default Login;

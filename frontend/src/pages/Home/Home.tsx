@@ -14,7 +14,7 @@ const Home: FC = () => {
         <button
           onClick={() => {
             logout();
-            navigate({ to: "/register" });
+            navigate({ to: "/login" });
           }}
         >
           Logout
