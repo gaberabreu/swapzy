@@ -22,7 +22,12 @@ describe("Login", () => {
   });
 
   it("should navigate to / when form submission succeeds", async () => {
-    vi.mocked(postLogin).mockResolvedValue(null);
+    vi.mocked(postLogin).mockResolvedValue({
+      accessToken: "fakeAccessToken",
+      expiresIn: 300,
+      refreshToken: "fakeRefreshToken",
+      tokenType: "fake",
+    });
 
     const { getByText, getByLabelText } = render(<Login />);
 

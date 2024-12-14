@@ -24,6 +24,6 @@ describe("Home", () => {
     fireEvent.click(getByText("Logout"));
 
     expect(mockNavigate).toHaveBeenCalledOnce();
-    expect(mockNavigate).toHaveBeenCalledWith({ to: "/register" });
+    expect(mockNavigate).toHaveBeenCalledWith({ to: "/login" });
   });
 });
