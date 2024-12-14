@@ -49,6 +49,7 @@ jobs:
         run: |
           sonar-scanner \
             -Dsonar.projectKey=gaberabreu_swapzy_frontend \
+            -Dsonar.projectName=swapzy_frontend \
             -Dsonar.organization=gaberabreu \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.token=${{ secrets.SONAR_TOKEN_FRONTEND }} \
