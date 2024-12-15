@@ -17,8 +17,8 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 
-import Link from "@/components/Link/Link";
-import LoadingButton from "@/components/LoadingButton/LoadingButton";
+import Link from "@/components/Link";
+import LoadingButton from "@/components/LoadingButton";
 import GoogleIcon from "@/icons/GoogleIcon";
 import SitemarkIcon from "@/icons/Sitemark";
 import { postLogin } from "@/services/auth.service";
@@ -83,7 +83,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
 
 const Login: FC = () => {
   const login = useAuthStore((state) => state.login);
-  const navigate = useNavigate({ from: "/login" });
+  const navigate = useNavigate({ from: "/auth/login" });
 
   const form = useForm({
     ...formOpts,
@@ -205,7 +205,7 @@ const Login: FC = () => {
             <Link
               variant="body2"
               sx={{ alignSelf: "center" }}
-              to="/register"
+              to="/auth/register"
             >
               Register
             </Link>

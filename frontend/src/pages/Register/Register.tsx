@@ -17,8 +17,8 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { styled } from "@mui/material/styles";
 
-import Link from "@/components/Link/Link";
-import LoadingButton from "@/components/LoadingButton/LoadingButton";
+import Link from "@/components/Link";
+import LoadingButton from "@/components/LoadingButton";
 import GoogleIcon from "@/icons/GoogleIcon";
 import SitemarkIcon from "@/icons/Sitemark";
 import { postRegister } from "@/services/auth.service";
@@ -84,14 +84,14 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const Register: FC = () => {
-  const navigate = useNavigate({ from: "/register" });
+  const navigate = useNavigate({ from: "/auth/register" });
 
   const form = useForm({
     ...formOpts,
     onSubmit: async ({ value }) => {
       await postRegister(value)
         .then(() => {
-          navigate({ to: "/login" });
+          navigate({ to: "/auth/login" });
         })
         .catch((error) => toast.error(error.title));
     },
@@ -205,7 +205,7 @@ const Register: FC = () => {
             <Link
               variant="body2"
               sx={{ alignSelf: "center" }}
-              to="/login"
+              to="/auth/login"
             >
               Login
             </Link>
