@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 const RouteComponent: FC = () => {

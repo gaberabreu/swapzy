@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import SvgIcon from "@mui/material/SvgIcon";
 
 const GoogleIcon: FC = () => {

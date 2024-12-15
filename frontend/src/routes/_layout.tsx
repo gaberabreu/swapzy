@@ -1,8 +1,10 @@
 import type { FC } from "react";
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 
 import Box from "@mui/material/Box";
-import AppBar from "@/components/AppBar";
+
+import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+
+import AppBar from "@/components/AppHeader";
 
 const RouteComponent: FC = () => {
   return (

@@ -1,6 +1,8 @@
 import { type Mock, beforeEach, describe, expect, it, vi } from "vitest";
-import { toast } from "react-toastify";
 import { fireEvent, render, waitFor } from "@testing-library/react";
+
+import { toast } from "react-toastify";
+
 import { useNavigate } from "@tanstack/react-router";
 
 import { postRegister } from "@/services/auth.service";
