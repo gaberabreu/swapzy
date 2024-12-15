@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 
 import type { AuthState } from "@/stores/authStore";
