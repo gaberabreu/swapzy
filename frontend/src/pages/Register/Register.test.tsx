@@ -42,7 +42,7 @@ describe("Register", () => {
         password: "password123",
       });
       expect(mockNavigate).toHaveBeenCalledOnce();
-      expect(mockNavigate).toHaveBeenCalledWith({ to: "/login" });
+      expect(mockNavigate).toHaveBeenCalledWith({ to: "/auth/login" });
     });
   });
 
