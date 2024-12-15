@@ -2,25 +2,25 @@ import type { FC } from "react";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
-import { formOptions, useForm } from "@tanstack/react-form";
-import { zodValidator } from "@tanstack/zod-form-adapter";
-import { useNavigate } from "@tanstack/react-router";
-
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import MuiCard from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import MuiCard from "@mui/material/Card";
 import MuiStack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { styled } from "@mui/material/styles";
 
-import Link from "@/components/Link/Link";
-import LoadingButton from "@/components/LoadingButton/LoadingButton";
+import { formOptions, useForm } from "@tanstack/react-form";
+import { useNavigate } from "@tanstack/react-router";
+import { zodValidator } from "@tanstack/zod-form-adapter";
+
+import Link from "@/components/Link";
+import LoadingButton from "@/components/LoadingButton";
 import GoogleIcon from "@/icons/GoogleIcon";
-import SitemarkIcon from "@/icons/Sitemark";
+import SitemarkIcon from "@/icons/SitemarkIcon";
 import { postLogin } from "@/services/auth.service";
 import useAuthStore from "@/stores/authStore";
 
@@ -83,7 +83,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
 
 const Login: FC = () => {
   const login = useAuthStore((state) => state.login);
-  const navigate = useNavigate({ from: "/login" });
+  const navigate = useNavigate({ from: "/auth/login" });
 
   const form = useForm({
     ...formOpts,
@@ -205,7 +205,7 @@ const Login: FC = () => {
             <Link
               variant="body2"
               sx={{ alignSelf: "center" }}
-              to="/register"
+              to="/auth/register"
             >
               Register
             </Link>

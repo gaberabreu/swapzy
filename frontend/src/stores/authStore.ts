@@ -15,6 +15,7 @@ const useAuthStore = create<AuthState & AuthAction>()(
   devtools(
     persist(
       (set) => ({
+        isAuthenticated: false,
         login: (token: TokenResponseData) => set(() => ({ isAuthenticated: true, token })),
         logout: () => set(() => ({ isAuthenticated: false, token: undefined })),
       }),

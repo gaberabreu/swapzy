@@ -1,4 +1,5 @@
 import type { FC } from "react";
+
 import Button, { type ButtonProps } from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import { styled } from "@mui/material/styles";
@@ -26,6 +27,7 @@ const LoadingButton: FC<LoadingButtonProps> = ({ children, disabled, loading, ..
           <CircularProgress
             size={20}
             color="inherit"
+            aria-label="circular progress"
           />
         </LoaderWrapper>
       )}

@@ -2,25 +2,25 @@ import type { FC } from "react";
 import { toast } from "react-toastify";
 import { z } from "zod";
 
-import { formOptions, useForm } from "@tanstack/react-form";
-import { zodValidator } from "@tanstack/zod-form-adapter";
-import { useNavigate } from "@tanstack/react-router";
-
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import MuiCard from "@mui/material/Card";
 import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import MuiCard from "@mui/material/Card";
 import MuiStack from "@mui/material/Stack";
+import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { styled } from "@mui/material/styles";
 
-import Link from "@/components/Link/Link";
-import LoadingButton from "@/components/LoadingButton/LoadingButton";
+import { formOptions, useForm } from "@tanstack/react-form";
+import { useNavigate } from "@tanstack/react-router";
+import { zodValidator } from "@tanstack/zod-form-adapter";
+
+import Link from "@/components/Link";
+import LoadingButton from "@/components/LoadingButton";
 import GoogleIcon from "@/icons/GoogleIcon";
-import SitemarkIcon from "@/icons/Sitemark";
+import SitemarkIcon from "@/icons/SitemarkIcon";
 import { postRegister } from "@/services/auth.service";
 
 const formSchema: z.ZodType<RegisterRequestData> = z.object({
@@ -84,14 +84,14 @@ const Card = styled(MuiCard)(({ theme }) => ({
 }));
 
 const Register: FC = () => {
-  const navigate = useNavigate({ from: "/register" });
+  const navigate = useNavigate({ from: "/auth/register" });
 
   const form = useForm({
     ...formOpts,
     onSubmit: async ({ value }) => {
       await postRegister(value)
         .then(() => {
-          navigate({ to: "/login" });
+          navigate({ to: "/auth/login" });
         })
         .catch((error) => toast.error(error.title));
     },
@@ -205,7 +205,7 @@ const Register: FC = () => {
             <Link
               variant="body2"
               sx={{ alignSelf: "center" }}
-              to="/login"
+              to="/auth/login"
             >
               Login
             </Link>

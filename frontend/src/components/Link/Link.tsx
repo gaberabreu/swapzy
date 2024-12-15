@@ -1,5 +1,7 @@
 import { type FC } from "react";
+
 import MuiLink, { type LinkProps as MuiLinkProps } from "@mui/material/Link";
+
 import { Link as RouterLink, type LinkProps as RouterLinkProps } from "@tanstack/react-router";
 
 interface LinkProps extends MuiLinkProps {
